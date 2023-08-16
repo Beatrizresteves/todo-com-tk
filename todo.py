@@ -49,18 +49,23 @@ class ToDoList:
                 tk.END, f"{tarefa.nome}: {tarefa.status}")
             if tarefa.status == 'A fazer':
                 self.lista_tarefas_a_fazer.insert(
-                    tk.END, f"{tarefa.nome}: {tarefa.status}")
+                    tk.END, f"{tarefa.nome}")
             elif tarefa.status == 'Em execução':
                 self.lista_tarefas_em_execucao.insert(
-                    tk.END, f"{tarefa.nome}: {tarefa.status}")
+                    tk.END, f"{tarefa.nome}")
             elif tarefa.status == 'Concluída':
                 self.lista_tarefas_concluidas.insert(
-                    tk.END, f"{tarefa.nome}: {tarefa.status}")
+                    tk.END, f"{tarefa.nome}")
 
     def criar_interface(self):
         # Rótulos (títulos)
         label_tarefa = tk.Label(self.root, text="Nome da Tarefa:")
-        label_status = tk.Label(self.root, text="Status:")
+        label_status = tk.Label(
+            self.root, text="Status- Informe se a tarefa está 'A fazer', 'Em execução' ou 'Concluída's")
+        label_a_fazer = tk.Label(self.root, text="Tarefas a serem feitas:")
+        label_em_execucao = tk.Label(
+            self.root, text="Tarefas em execução:")
+        label_concluidas = tk.Label(self.root, text="Tarefas concluídas:")
 
         # Entradas
         self.entrada_tarefa = tk.Entry(self.root)
@@ -85,12 +90,16 @@ class ToDoList:
         self.lista_tarefas_em_execucao = tk.Listbox(self.root)
         self.lista_tarefas_concluidas = tk.Listbox(self.root)
 
+        label_a_fazer.pack(padx=5, pady=5, anchor=tk.W)
         self.lista_tarefas_a_fazer.pack(
-            padx=10, pady=2, fill=tk.BOTH, expand=True)
+            padx=5, pady=1, fill=tk.BOTH, expand=True)
+        label_em_execucao.pack(padx=5, pady=5, anchor=tk.W)
         self.lista_tarefas_em_execucao.pack(
-            padx=10, pady=2, fill=tk.BOTH, expand=True)
+            padx=5, pady=2, fill=tk.BOTH, expand=True)
+        label_concluidas.pack(padx=5, pady=5, anchor=tk.W)
         self.lista_tarefas_concluidas.pack(
             padx=10, pady=2, fill=tk.BOTH, expand=True)
+
         self.lista_tarefas.pack(padx=10, pady=5, fill=tk.BOTH, expand=True)
 
         self.atualizar_lista()

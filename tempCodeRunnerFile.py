@@ -1,1 +1,1 @@
-entrada_tar
+label_stat
