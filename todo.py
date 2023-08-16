@@ -31,6 +31,9 @@ class ToDoList:
 
     def remover_tarefa(self):
         selecionado = self.lista_tarefas.curselection()
+        selecionado = self.lista_tarefas_a_fazer.curselection()
+        selecionado = self.lista_tarefas_em_execucao.curselection()
+        selecionado = self.lista_tarefas_concluidas.curselection()
         if selecionado:
             indice = selecionado[0]
             self.tarefas.pop(indice)
@@ -38,9 +41,21 @@ class ToDoList:
 
     def atualizar_lista(self):
         self.lista_tarefas.delete(0, tk.END)
+        self.lista_tarefas_a_fazer.delete(0, tk.END)
+        self.lista_tarefas_em_execucao.delete(0, tk.END)
+        self.lista_tarefas_concluidas.delete(0, tk.END)
         for tarefa in self.tarefas:
             self.lista_tarefas.insert(
                 tk.END, f"{tarefa.nome}: {tarefa.status}")
+            if tarefa.status == 'A fazer':
+                self.lista_tarefas_a_fazer.insert(
+                    tk.END, f"{tarefa.nome}: {tarefa.status}")
+            elif tarefa.status == 'Em execução':
+                self.lista_tarefas_em_execucao.insert(
+                    tk.END, f"{tarefa.nome}: {tarefa.status}")
+            elif tarefa.status == 'Concluída':
+                self.lista_tarefas_concluidas.insert(
+                    tk.END, f"{tarefa.nome}: {tarefa.status}")
 
     def criar_interface(self):
         # Rótulos (títulos)
@@ -66,6 +81,16 @@ class ToDoList:
         botao_remover.pack(padx=10, pady=5)
 
         self.lista_tarefas = tk.Listbox(self.root)
+        self.lista_tarefas_a_fazer = tk.Listbox(self.root)
+        self.lista_tarefas_em_execucao = tk.Listbox(self.root)
+        self.lista_tarefas_concluidas = tk.Listbox(self.root)
+
+        self.lista_tarefas_a_fazer.pack(
+            padx=10, pady=2, fill=tk.BOTH, expand=True)
+        self.lista_tarefas_em_execucao.pack(
+            padx=10, pady=2, fill=tk.BOTH, expand=True)
+        self.lista_tarefas_concluidas.pack(
+            padx=10, pady=2, fill=tk.BOTH, expand=True)
         self.lista_tarefas.pack(padx=10, pady=5, fill=tk.BOTH, expand=True)
 
         self.atualizar_lista()
